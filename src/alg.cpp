@@ -43,7 +43,7 @@ int countPairs3(int *arr, int len, int value) {
   Sort(arr, len);
   int count = 0, temp;
   for (int i = 0; i < len - 1; i++) {
-    int first = i, last = len - 1;
+    int first = i, last = len;
     while (first < last - 1) {
       int mid = (first + last) / 2;
       if (arr[i] + arr[mid] == value) {
