@@ -1,10 +1,67 @@
 // Copyright 2021 NNTU-CS
+
+void Sort(int* arr, int len) {
+  int key = 0;
+  int i = 0;
+  for (int j = 1; j < len; j++) {
+    key = arr[j];
+    i = j - 1;
+    while (i >= 0 && arr[i] > key) {
+      arr[i + 1] = arr[i];
+      i = i - 1;
+      arr[i + 1] = key;
+    }
+  }
+}
+
 int countPairs1(int *arr, int len, int value) {
-  return 0;
+  int count = 0;
+  for (int i = 0; i < len; i++) {
+    for (int j = 0; j < len; j++) {
+      if (i != j && arr[i] + arr[j] == value) {
+        count++;
+      }
+    }
+  }
+  return count;
 }
+
 int countPairs2(int *arr, int len, int value) {
-  return 0;
+  int count = 0;
+  for (int i = 0; i < len; i++) {
+    for (int j = i + 1; j < len; j++) {
+      if (arr[i] + arr[j] == value) {
+        count++;
+      }
+    }
+  }
+  return count;
 }
+
 int countPairs3(int *arr, int len, int value) {
-  return 0;
+  Sort(arr, len);
+  int count = 0, temp;
+  for (int i = 0; i < len - 1; i++) {
+    int first = i, last = len - 1;
+    while (first < last - 1) {
+      int mid = (first + last) / 2;
+      if (arr[i] + arr[mid] == value) {
+        count++;
+        temp = mid + 1;
+        while (arr[i] + arr[temp] == value) {
+          count++;
+          temp++;
+        }
+        temp = mid - 1;
+        while (arr[i] + arr[temp] == value ) {
+          count++;
+          temp--;
+        }
+        break;
+      }
+      if (arr[i] + arr[mid] > value) last = mid;
+      else first = mid;
+    }
+  }
+  return count;
 }
