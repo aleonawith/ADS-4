@@ -23,7 +23,8 @@ int countPairs1(int *arr, int len, int value) {
       }
     }
   }
-  return (count/2);
+  count = count / 2;
+  return count;
 }
 
 int countPairs2(int *arr, int len, int value) {
@@ -59,7 +60,7 @@ int countPairs3(int *arr, int len, int value) {
         }
         break;
       }
-      if (arr[i] + arr[mid] > value) 
+      if (arr[i] + arr[mid] > value)
         last = mid;
       else
         first = mid;
