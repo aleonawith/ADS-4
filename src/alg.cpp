@@ -41,29 +41,29 @@ int countPairs2(int *arr, int len, int value) {
 
 int countPairs3(int *arr, int len, int value) {
   Sort(arr, len);
-  int count = 0, temp;
+  int count = 0, temp, left, right, middle;
   for (int i = 0; i < len - 1; i++) {
-    int first = i, last = len;
-    while (first < last - 1) {
-      int mid = (first + last) / 2;
-      if (arr[i] + arr[mid] == value) {
+    left = i, right = len;
+    while (left < right - 1) {
+      middle = (left + right) / 2;
+      if (arr[i] + arr[middle] == value) {
         count++;
-        temp = mid + 1;
-        while (arr[i] + arr[temp] == value) {
-          count++;
-          temp++;
+        temp = middle + 1;
+        while (arr[i] + arr[temp] == value && temp < right) {
+          temp++; count++;
         }
-        temp = mid - 1;
-        while (arr[i] + arr[temp] == value) {
-          count++;
-          temp--;
+        temp = middle - 1;
+        while (arr[i] + arr[temp] == value && temp > left) {
+          temp--; count++;
         }
         break;
       }
-      if (arr[i] + arr[mid] > value)
-        last = mid;
-      else
-        first = mid;
+      else if (arr[i] + arr[middle] > value) {
+        right = middle;
+      }
+      else {
+        left = middle;
+      }
     }
   }
   return count;
